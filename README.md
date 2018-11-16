@@ -7,10 +7,18 @@ Minimalist and secure web based escrow service for Bitcoin powered by blockchain
   - Secured against Denial-of-service attacks
   - leverages blockchain.info API
   
+![logo](https://en.bitcoin.it/w/images/en/f/fd/BC_nBG_64px.png)
 ### Installation
 WebBitcoinEscrow requires [Go 1.9](https://golang.org/dl/)+ to run.
 
-Install the dependencies and build with Go.
+The Blockchain Wallet API V2 has to be installed and must be running.
+https://github.com/blockchain/service-my-wallet-v3#installation
+```sh
+npm install -g blockchain-wallet-service
+blockchain-wallet-service start --port 3000
+```
+
+Install the dependencies and build with "Go build main.go".
 
 ```sh
 go get github.com/didip/tollbooth
