@@ -1,4 +1,4 @@
-# WebBitcoinEscrow
+# WebBitcoinEscrow ![logo](https://en.bitcoin.it/w/images/en/f/fd/BC_nBG_64px.png)
 Minimalist and secure web based escrow service for Bitcoin powered by blockchain.info written in Go.
   - Very secure due to secret based system rather than using authentication
   - Written in Go with Echo, thus highly performant and low in RAM usage
@@ -15,7 +15,7 @@ Alice generates a escrow with her details eg BTC Wallet. Sends a link that was g
 There is a fee is 5% of the transaction value but this can be changed in the admin panel.
 If there is a conflict the user can escalate the escrow and the admin can resolve this in the panel.
 
-![logo](https://en.bitcoin.it/w/images/en/f/fd/BC_nBG_64px.png)
+
 ### Installation
 WebBitcoinEscrow requires [Go 1.9](https://golang.org/dl/)+ to run.
 
