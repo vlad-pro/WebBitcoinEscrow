@@ -22,6 +22,7 @@ import (
 	"github.com/labstack/echo/middleware"
 	"github.com/rs/xid"
 	"golang.org/x/crypto/bcrypt"
+	"github.com/tidwall/gjson"
 )
 
 //To make global db access possible
