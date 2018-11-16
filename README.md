@@ -28,6 +28,7 @@ go get github.com/jinzhu/gorm/dialects/sqlite
 go get github.com/labstack/echo
 go get github.com/rs/xid
 go get golang.org/x/crypto/bcrypt
+go get -u github.com/tidwall/gjson
 ```
 ### Screenshots
 ![pic1](https://raw.githubusercontent.com/tegk/WebBitcoinEscrow/master/1.jpg)
