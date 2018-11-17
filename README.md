@@ -7,6 +7,8 @@ Minimalist and secure web based escrow service for Bitcoin powered by blockchain
   - Secured against Denial-of-service attacks
   - leverages blockchain.info API
   
+Warning: This is BETA software!
+  
 Example:  
 Alice wants to buy 1 Bitcoin from Bob for $5k but wants to be sure that she gets the Bitcoin. Bob also wants to be sure that Alice just receives the Bitcoin when money appears on his bank account.
 
