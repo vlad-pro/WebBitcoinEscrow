@@ -31,6 +31,10 @@ blockchain-wallet-service start --port 3000
 Install the dependencies and build with "Go build main.go".
 
 ```sh
+go get -u github.com/tegk/WebBitcoinEscrow
+
+You might have to install them:
+
 go get github.com/didip/tollbooth
 go get github.com/didip/tollbooth_echo
 go get github.com/jinzhu/gorm
