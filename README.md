@@ -40,6 +40,12 @@ go get github.com/rs/xid
 go get golang.org/x/crypto/bcrypt
 go get -u github.com/tidwall/gjson
 ```
+Run with admin rights as this binds port 80:
+```sh
+sudo ./main
+```
+To configure the application login into the admin panel at http://localhost/admin with user and password "Admin" and change the settings.
+
 ### Screenshots
 ![pic1](https://raw.githubusercontent.com/tegk/WebBitcoinEscrow/master/1.jpg)
 ![pic1](https://raw.githubusercontent.com/tegk/WebBitcoinEscrow/master/2.jpg)
