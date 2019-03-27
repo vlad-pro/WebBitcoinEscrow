@@ -9,9 +9,7 @@ Very secure due to secret based system rather than using authentication
 
 Example:
 
-Alice wants to buy 2.6 Bitcoin from Bob for $5k but wants to be sure that she gets the Bitcoin. Bob also wants to be sure that Alice just receives the Bitcoin when money appears on his bank account.
-Alice generates a escrow with her details eg BTC Wallet. Sends a link that was generated to Bob. Bob uses the onetime secret-based URL to generate another secret based URL to release the trade once he sees the money on his bank statement. It’s not possible to generate the secrets again!
-There is a fee of 5% of the transaction value but this can be changed in the admin panel. If there is a conflict the user can escalate the escrow and the admin can resolve this in the panel.
+Alice wants to buy 2.6 Bitcoin from Bob for $5k but wants to be sure that she gets the Bitcoin. Bob also wants to be sure that Alice just receives the Bitcoin when money appears on his bank account. Alice generates an escrow with her details eg BTC Wallet. Sends a link that was generated to Bob. Bob uses the onetime secret-based URL to generate another secret based URL to release the trade once he sees the money on his bank statement. It’s not possible to generate the secrets again! There is a fee of 5% of the transaction value but this can be changed in the admin panel. If there is a conflict the user can escalate the escrow and the admin can resolve this in the panel.
 
 
 
