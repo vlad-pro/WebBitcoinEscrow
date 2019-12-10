@@ -7,6 +7,7 @@ import (
 	"html/template"
 	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"regexp"
 	"strconv"
@@ -18,11 +19,11 @@ import (
 	"github.com/didip/tollbooth_echo"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/sqlite"
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"github.com/rs/xid"
-	"golang.org/x/crypto/bcrypt"
 	"github.com/tidwall/gjson"
+	"golang.org/x/crypto/bcrypt"
 )
 
 //To make global db access possible
@@ -49,7 +50,6 @@ type Product struct {
 	TradeEscaledB         bool `gorm:"default:false"`
 }
 
-//Todo is astruct to hold data
 type Todo struct {
 	UserPanel        string
 	UserPanels       string
@@ -62,7 +62,6 @@ type Todo struct {
 	Ubfrei2          string
 }
 
-//TodoPageData is a struc that helps
 type TodoPageData struct {
 	Todos []Todo
 	Empty string
@@ -91,7 +90,7 @@ func CheckPasswordHash(password, hash string) bool {
 	return err == nil
 }
 
-//validates btc adress
+//validates btc address
 func validateBTCa(tx string) bool {
 	url := "http://codacoin.com/api/public.php?request=validate&address=" + tx
 	response, _ := http.Get(url)
@@ -102,7 +101,6 @@ func validateBTCa(tx string) bool {
 		return true
 	}
 	return false
-
 }
 
 //hashthis reuturns hash as string
@@ -113,9 +111,9 @@ func hashthis(password string) string {
 	return hex.EncodeToString(b)
 }
 
-//returns new generated BTC adress
-func getNewAdressBTC(label string, UID string, pwd string) string {
-	response, err := http.Get("http://localhost:3000/merchant/" + UID +
+//returns new generated BTC address
+func getNewAdressBTC(label string, uuid string, pwd string) string {
+	response, err := http.Get("http://localhost:3000/merchant/" + uuid +
 		"/new_address?password=" + pwd + "&label=" + label)
 	if err != nil {
 		return "False"
@@ -129,10 +127,10 @@ func getNewAdressBTC(label string, UID string, pwd string) string {
 	return value.String()
 }
 
-//returns converted satoshi to btc of adress
-func getBalanceBTC(adress string, UID string, pwd string) string {
+//returns converted satoshi to btc of address
+func getBalanceBTC(address string, UID string, pwd string) string {
 	response, err := http.Get("http://localhost:3000/merchant/" + UID +
-		"/address_balance?password=" + pwd + "&address=" + adress)
+		"/address_balance?password=" + pwd + "&address=" + address)
 	if err != nil {
 		return "False"
 	}
@@ -148,7 +146,7 @@ func getBalanceBTC(adress string, UID string, pwd string) string {
 	return bfff
 }
 
-//sends satoshi to btc adress
+//sends satoshi to btc address
 func payAdressBTC(UID string, pwd string, outAdr string, amount string) string {
 	bf, _ := strconv.ParseFloat(amount, 64)
 	bff := int(bf * 100000000)
@@ -218,7 +216,7 @@ func GenIndex(c echo.Context) error {
 		fview["FORM2_WARN_ca"] = "fas fa-exclamation-triangle"
 		withouterror = false
 	} else {
-		if validateBTCa(formValueAdress) != true {
+		if !validateBTCa(formValueAdress) {
 			fview["FORM2_WARN"] = "Not a valid address!"
 			fview["FORM2_WARN_d"] = "is-danger"
 			fview["FORM2_WARN_ca"] = "fas fa-exclamation-triangle"
@@ -496,7 +494,9 @@ func userbPanelReleaseFinal(c echo.Context) error {
 func adminuserbPanelReleaseFinal(c echo.Context) error {
 	fview := map[string]interface{}{}
 	id := c.Param("id")
+
 	var product Product
+
 	db2.Where("url_b_frei = ?", id).First(&product)
 	if len(product.URLBFrei) < 10 {
 		fview["MESS"] = "URL not found!"
@@ -519,16 +519,19 @@ func adminPanel(c echo.Context) error {
 	p := []Product{}
 	db2.Where("trade_escaled_b = ?", true).Find(&p)
 	s := []Todo{}
+
 	for _, v := range p {
-		if v.TradeReleasedB == false {
+		if !v.TradeReleasedB {
 			tro := "Escalated"
 			trof := "red"
-			item1 := Todo{UserPanel: currentURL + "/trans/" + v.URLPanel, UserPanels: v.URLPanel[:15], Tradestatus: tro, TradeStatusColor: trof,
+			item1 := Todo{UserPanel: currentURL + "/trans/" + v.URLPanel, UserPanels: v.URLPanel[:15],
+				Tradestatus: tro, TradeStatusColor: trof,
 				Empfname: v.NameA, Empfadresse: v.BtcAdressA, Ubfrei2: currentURL + "/admin/tb/" + v.URLBFrei,
 				Zahlpf: v.NameB, Ubfrei: currentURL + "/ub/release/" + v.URLBFrei}
 			s = append(s, item1)
 		}
 	}
+
 	var m string
 	if len(s) < 1 {
 		m = "No escalated escrow pending."
@@ -598,6 +601,7 @@ func main() {
 	}
 	// Migrate the schema
 	db2.AutoMigrate(&Product{})
+
 	defer db.Close()
 
 	db3, err := gorm.Open("sqlite3", "settings.db")
@@ -611,6 +615,7 @@ func main() {
 		BlockchainUser:     "Please enter UID",
 		BlockchainPassword: "Please enter your password", Multi: 0.5}
 	db3.Create(&ss)
+
 	defer db3.Close()
 
 	t := &Template{
@@ -663,5 +668,8 @@ func main() {
 	g.POST("/settings/change", adminPanelSettingsChange)
 	g.GET("/tb/:id", adminuserbPanelReleaseFinal)
 
-	e.Start(":80") //Change here the port of the webapp
+	err = e.Start(":8080") //Change here the port of the webapp
+	if err != nil {
+		log.Fatal(err)
+	}
 }
