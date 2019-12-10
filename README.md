@@ -46,10 +46,10 @@ sudo ./main
 To configure the application login into the admin panel at http://localhost/admin with user and password "Admin" and change the settings.
 
 ### Screenshots
-![pic1](https://github.com/tegk/WebBitcoinEscrow/tree/master/screenshots/1.jpg)
-![pic1](https://github.com/tegk/WebBitcoinEscrow/tree/master/screenshots/2.jpg)
-![pic1](https://github.com/tegk/WebBitcoinEscrow/tree/master/screenshots/3.jpg)
-![pic1](https://github.com/tegk/WebBitcoinEscrow/tree/master/screenshots/4.jpg)
-![pic1](https://github.com/tegk/WebBitcoinEscrow/tree/master/screenshots/5.jpg)
-![pic1](https://github.com/tegk/WebBitcoinEscrow/tree/master/screenshots/6.jpg)
-![pic1](https://github.com/tegk/WebBitcoinEscrow/tree/master/screenshots/7.jpg)
+![pic1](https://github.com/tegk/WebBitcoinEscrow/blob/master/screenshots/1.jpg)
+![pic1](https://github.com/tegk/WebBitcoinEscrow/blob/master/screenshots/2.jpg)
+![pic1](https://github.com/tegk/WebBitcoinEscrow/blob/master/screenshots/3.jpg)
+![pic1](https://github.com/tegk/WebBitcoinEscrow/blob/master/screenshots/4.jpg)
+![pic1](https://github.com/tegk/WebBitcoinEscrow/blob/master/screenshots/5.jpg)
+![pic1](https://github.com/tegk/WebBitcoinEscrow/blob/master/screenshots/6.jpg)
+![pic1](https://github.com/tegk/WebBitcoinEscrow/blob/master/screenshots/7.jpg)
